@@ -159,6 +159,26 @@ def delete_post_background_clusters(result,substrate_result, post_harvest_polygo
 
     return dict_to_det_data_sample(result)
 
+def simple_delete_post_background_clusters(result,substrate_result):
+    result = result.cpu().numpy().to_dict()
+    substrate_bbox = expand_box(substrate_result.cpu()["bboxes"][0],0.025)
+    to_delete = []
+
+    for idy in range(len(result["pred_instances"]["bboxes"])):
+        box2 = torch.tensor([result["pred_instances"]["bboxes"][idy]], dtype=torch.float)
+        substrate_iou = bops.box_iou(substrate_bbox, box2)
+        ## first check is to have common area with the expanded substrate, this filters out the far away instances
+        if substrate_iou==0:
+            to_delete.append(idy)
+                    
+    ## delete from all components of the result variable the overlapping instances with classification/confidence score
+    result["pred_instances"]["bboxes"] = np.delete(result["pred_instances"]["bboxes"],to_delete, axis=0)
+    result["pred_instances"]["scores"] = np.delete(result["pred_instances"]["scores"],to_delete, axis=0)
+    result["pred_instances"]["masks"] = np.delete(result["pred_instances"]["masks"],to_delete, axis=0)
+    result["pred_instances"]["labels"] = np.delete(result["pred_instances"]["labels"],to_delete, axis=0)
+
+    return dict_to_det_data_sample(result)
+
 #Calculating intersection over union for coordiante list 
 def harvest_filter(polygons,polygons_info,baseline,margin = 0.05,iou_threshold = 0.3):
 
