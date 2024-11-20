@@ -162,6 +162,7 @@ cython_debug/
 #.idea/
 
 /runs/
+/Results/
 /Images/Timelapse_1/train/labels/
 /Images/Timelapse_1/val/labels/
 /Images/Timelapse_2/train/labels/
