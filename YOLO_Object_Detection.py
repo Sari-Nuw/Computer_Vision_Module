@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 import cv2
-import numpy as np
 from ultralytics import YOLO
 import os
 
@@ -17,13 +15,13 @@ def bbox_2_yolo(x1,y1,x2,y2,width,height):
     return x_center,y_center,bbox_width,bbox_height
 
 #Path to images for prediction
-image_path = r"C:/Users/nuway/OneDrive/Desktop/GOOD_Project/GOOD_Dataset/Images"
+image_path = r"Images/Timelapse_1/test/"
 
 #Path to result images
-results_path = r"C:/Users/nuway/OneDrive/Desktop/GOOD_Project/Prediction Results/"
+results_path = r"Results/YOLO_Images/"
 
 #Path to object detection model
-model_path = r'runs\detect\epoch75n\weights\best.pt'
+model_path = r"runs\detect\train\weights\best.pt"
 
 # create the result folders
 os.makedirs(image_path,exist_ok=True)
@@ -33,14 +31,12 @@ os.makedirs(results_path,exist_ok=True)
 model = YOLO(model_path)
 
 #Setting threshold for object detection 
-threshold = 0.5
+threshold = 0.01
 
 #Reading image
-for num in range(7):
+for num in range(20):
 
-    color_image = mpimg.imread(image_path + 'img ({})'.format(num))
-    #Gets the color bands from the images and also the binary of the image (whether or not data is available)
-    copy_image = np.copy(color_image)
+    color_image = cv2.imread(image_path + 'Test_Img ({}).JPG'.format(num+1))
 
     #Getting results of object detection
     results = model(color_image)[0]
@@ -61,5 +57,8 @@ for num in range(7):
     #Show the image with bounding boxes
     plt.imshow(color_image)
     plt.show()
+
+    #Saving results
+    cv2.imwrite(results_path + "Test_Img_YOLO_Detections ({}).JPG".format(num+1),color_image)
 
 

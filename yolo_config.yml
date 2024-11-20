@@ -1,0 +1,7 @@
+path: C:\Users\Dimitrios\Desktop\Computer_Vision_Module\Images\Timelapse_1 # dataset root dir
+train: train  # train images (relative to 'path')
+val: train  # val images (relative to 'path')
+
+# Classes
+names:
+  0: mushroom

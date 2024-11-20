@@ -3,6 +3,7 @@ from Information_Processing_Utilities import *
 from Model_Processing_Utilities import *
 from mmdet.apis import inference_detector
 import mmcv
+import cv2
 import os
 
 #Names of the instance segmentation models being used
