@@ -7,22 +7,21 @@ import cv2
 import os
 
 #Names of the instance segmentation models being used
-mushroom_architecture_selected = "mushroom_custom_config_mask_rcnn_convnext-t_p4_w7_fpn_fp16_ms-crop_3x_coco"
-substrate_architecture_selected = "substrate_custom_config_mask_rcnn_convnext-t_p4_w7_fpn_fp16_ms-crop_3x_coco"
+mushroom_architecture_selected = "mushroom_mask_rcnn"
+substrate_architecture_selected = "substrate_mask_rcnn"
 
 # Set the paths for differnt folders
-working_folder = "./results/" + mushroom_architecture_selected + "/"
-configs_folder = "./configs/"
+working_folder = "Reults/"
+configs_folder = "configs/"
 predicted_images = working_folder + 'predicted_images/'
 
 #Path to images
-test_set_path = r"C:/Users/nuway/OneDrive/Desktop/Realsense Project/Python_Marigold/Timelapse/Timelapse1//"
+test_set_path = "Images/Timelapse1/test/"
 
 # Creating the output folders
 os.makedirs(working_folder,exist_ok=True)
 os.makedirs(predicted_images,exist_ok=True)
-os.makedirs(working_folder + "/Annotated/",exist_ok=True)
-os.makedirs(working_folder + "/Unsorted/",exist_ok=True)
+#os.makedirs(working_folder + "/Unsorted/",exist_ok=True)
 os.makedirs(working_folder + "/Substrate/",exist_ok=True)
 
 #Checking for available cuda/cpu
@@ -49,7 +48,7 @@ for img_num in range(len(os.listdir(test_set_path))):
     #To control which images are being processed
     if img_num > -1 and img_num < 300:
 
-        test_img = 'img ({}).JPG'.format(img_num+1)
+        test_img = 'Test_Img ({}).JPG'.format(img_num+1)
 
         # load the image
         img = mmcv.imread(test_set_path + test_img)

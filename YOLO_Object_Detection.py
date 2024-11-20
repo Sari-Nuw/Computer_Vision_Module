@@ -37,6 +37,7 @@ threshold = 0.01
 for num in range(20):
 
     color_image = cv2.imread(image_path + 'Test_Img ({}).JPG'.format(num+1))
+    color_image = cv2.cvtColor(color_image,cv2.COLOR_BGR2RGB)
 
     #Getting results of object detection
     results = model(color_image)[0]
@@ -59,6 +60,6 @@ for num in range(20):
     plt.show()
 
     #Saving results
-    cv2.imwrite(results_path + "Test_Img_YOLO_Detections ({}).JPG".format(num+1),color_image)
+    cv2.imwrite(results_path + "Test_Img_YOLO_Detections ({}).JPG".format(num+1),cv2.cvtColor(color_image,cv2.COLOR_RGB2BGR))
 
 

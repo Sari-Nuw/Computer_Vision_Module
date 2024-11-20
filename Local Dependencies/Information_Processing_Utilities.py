@@ -294,11 +294,11 @@ def save_cluster_array(sizing_image,poly,centre,box_image,local_poly,working_fol
 #Saving the various image types
 def save_image(working_folder,full_image,i):
 	os.makedirs(working_folder + "/Picture/",exist_ok=True)
-	cv2.imwrite(working_folder + "/Picture/images ({}).JPG".format(i+1), cv2.cvtColor(full_image,cv2.COLOR_RGB2BGR))
+	cv2.imwrite(working_folder + "/Picture/Test_Img ({}).JPG".format(i+1), cv2.cvtColor(full_image,cv2.COLOR_RGB2BGR))
 
 def save_sizing_image(working_folder,sizing_image,i):
 	os.makedirs(working_folder + "/Sizing/",exist_ok=True)
-	cv2.imwrite(working_folder + "/Sizing/images ({}).JPG".format(i+1), cv2.cvtColor(sizing_image,cv2.COLOR_RGB2BGR)) 
+	cv2.imwrite(working_folder + "/Sizing/Images ({}).JPG".format(i+1), cv2.cvtColor(sizing_image,cv2.COLOR_RGB2BGR)) 
 
 #Saving the image information in numpy array format
 def save_image_array(full_image,polygon,working_folder,i):
