@@ -293,8 +293,8 @@ def save_cluster_array(sizing_image,poly,centre,box_image,local_poly,working_fol
 
 #Saving the various image types
 def save_image(working_folder,full_image,i):
-	os.makedirs(working_folder + "/Picture/",exist_ok=True)
-	cv2.imwrite(working_folder + "/Picture/Test_Img ({}).JPG".format(i+1), cv2.cvtColor(full_image,cv2.COLOR_RGB2BGR))
+	os.makedirs(working_folder + "/Sorted/",exist_ok=True)
+	cv2.imwrite(working_folder + "/Sorted/Test_Img ({}).JPG".format(i+1), cv2.cvtColor(full_image,cv2.COLOR_RGB2BGR))
 
 def save_sizing_image(working_folder,sizing_image,i):
 	os.makedirs(working_folder + "/Sizing/",exist_ok=True)
@@ -323,8 +323,8 @@ def save_unsorted_image(img,polygons,working_folder,img_num):
 	for poly in polygons[-1]:
 		centre = Polygon(poly).centroid
 		cv2.polylines(unsorted_img, np.int32([poly]), True, (255, 0, 0), 10)
-		cv2.putText(unsorted_img, 'Pred {} {}'.format(i,poly[0]), (int(centre.x),int(centre.y)), cv2.FONT_HERSHEY_COMPLEX, 2, (0,255,0), 4, cv2.LINE_AA)
-		#cv2.putText(unsorted_img, 'Pred {}'.format(i), (int(centre.x),int(centre.y)), cv2.FONT_HERSHEY_COMPLEX, 4, (0,255,0), 6, cv2.LINE_AA)
+		#cv2.putText(unsorted_img, 'Pred {} {}'.format(i,poly[0]), (int(centre.x),int(centre.y)), cv2.FONT_HERSHEY_COMPLEX, 2, (0,255,0), 4, cv2.LINE_AA)
+		cv2.putText(unsorted_img, 'Pred {}'.format(i), (int(centre.x),int(centre.y)), cv2.FONT_HERSHEY_COMPLEX, 4, (0,255,0), 6, cv2.LINE_AA)
 		i += 1
 
 	# Saving the image with unsorted polygons
