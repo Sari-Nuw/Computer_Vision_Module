@@ -19,7 +19,7 @@ configs_folder = "configs/"
 predicted_images = working_folder + 'predicted_images/'
 
 #Path to images
-test_set_path = "Images/Timelapse_1/test/"
+test_set_path = "Images/Timelapse_2/test/"
 
 # Creating the output folders
 os.makedirs(working_folder,exist_ok=True)

@@ -94,32 +94,32 @@ def establish_mota(working_folder):
 #Getting annotations from text file (JSON Coco format)
 def get_annotations_json(text_file):
 
-	#Pathway to json file
-	with open(text_file, 'r') as file:
-		# Reading from json file
-		annotation_data = json.load(file)
+    #Pathway to json file
+    with open(text_file, 'r') as file:
+        # Reading from json file
+        annotation_data = json.load(file)
 
-	# Annotations for each image
-	annotations = [[] for _ in range(len(annotation_data['images']))]
-	sorting_annotations = [[] for _ in range(len(annotation_data['images']))]
-	
-	for annotation in annotation_data['annotations']:
+    # Annotations for each image
+    annotations = [[] for _ in range(len(annotation_data['images']))]
+    sorting_annotations = [[] for _ in range(len(annotation_data['images']))]
 
-		# Pairing each pair of x,y points together
-		points = annotation['segmentation'][0]
-		segment = []
-		pair = []
-		for point in points:
-			pair.append(int(point))
-			if len(pair) == 2:
-				segment.append(pair)
-				pair = []
-		
-		# Full polygon added to corresponding image
-		annotations[annotation['image_id']-1].append(segment)
-		sorting_annotations[annotation['image_id']-1].append([segment,annotation['tracking_id']])
+    for annotation in annotation_data['annotations']:
 
-	return annotations, sorting_annotations
+        # Pairing each pair of x,y points together
+        points = annotation['segmentation'][0]
+        segment = []
+        pair = []
+        for point in points:
+            pair.append(int(point))
+            if len(pair) == 2:
+                segment.append(pair)
+                pair = []
+        
+        # Full polygon added to corresponding image
+        annotations[annotation['image_id']-1].append(segment)
+        sorting_annotations[annotation['image_id']-1].append([segment,annotation['tracking_id']])
+
+    return annotations, sorting_annotations
 
 #Process annotation metrices for each image
 def get_annotation_metrics(annotations,polygons,TP_array, FP_array, FN_array):

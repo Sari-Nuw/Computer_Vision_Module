@@ -41,10 +41,6 @@ if not os.path.exists(path+'Stereo Depth Map\\'):
     os.mkdir(path+'Stereo Depth Map\\')
 if not os.path.exists(path+'Estimated Depth Map\\'):
     os.mkdir(path+'Estimated Depth Map\\')
-if not os.path.exists(path+'Contours\\'):
-    os.mkdir(path+'Contours\\')
-if not os.path.exists(path+'Contours Foreground\\'):
-    os.mkdir(path+'Contours Foreground\\')
 if not os.path.exists(path+'Estimated PCD\\'):
     os.mkdir(path+'Estimated PCD\\')
 if not os.path.exists(path+'Normalized Stereo PCD\\'):

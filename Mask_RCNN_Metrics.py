@@ -9,19 +9,20 @@ import mmcv
 import copy
 
 #Names of the instance segmentation models being used
-mushroom_architecture_selected = "mushroom_custom_config_mask_rcnn_convnext-t_p4_w7_fpn_fp16_ms-crop_3x_coco"
-substrate_architecture_selected = "substrate_custom_config_mask_rcnn_convnext-t_p4_w7_fpn_fp16_ms-crop_3x_coco"
+mushroom_architecture_selected = "mushroom_mask_rcnn"
+substrate_architecture_selected = "substrate_mask_rcnn"
 
 # Set the paths for differnt folders
-working_folder = "./results/" + mushroom_architecture_selected + "/"
-configs_folder = "./configs/"
+working_folder = "Results/"
+configs_folder = "configs/"
+annotation_folder = "Images/Annotations/"
 predicted_images = working_folder + 'predicted_images/'
 
 #Path to images
-test_set_path = r"C:/Users/nuway/OneDrive/Desktop/Realsense Project/Python_Marigold/Timelapse/Timelapse1//"
+test_set_path = "Images/Timelapse_1/test/"
 
 #Name and pathway to the relevant annotation text file 
-annotations, sorting_annotations = annotation_tracking('Full1.json')
+annotations, sorting_annotations = annotation_tracking(annotation_folder + 'Annotations_T1.json')
 
 # Creating the output folders
 os.makedirs(working_folder,exist_ok=True)
@@ -91,7 +92,7 @@ for img_num in range(len(os.listdir(test_set_path))):
     #To control which images are being processed
     if img_num > -1 and img_num < 300:
 
-        test_img = 'img ({}).JPG'.format(img_num+1)
+        test_img = 'Test_Img ({}).JPG'.format(img_num+1)
 
         # load the image
         img = mmcv.imread(test_set_path + test_img)
