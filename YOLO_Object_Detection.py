@@ -3,17 +3,6 @@ import cv2
 from ultralytics import YOLO
 import os
 
-def bbox_2_yolo(x1,y1,x2,y2,width,height):
-
-    #Calculating parameters and normalzing
-    bbox_width = (x2 - x1)/width
-    bbox_height = (y2 - y1)/height
-
-    x_center = x1/width + bbox_width/2
-    y_center = y1/height + bbox_height/2
-
-    return x_center,y_center,bbox_width,bbox_height
-
 #Path to images for prediction
 image_path = r"Images/Timelapse_1/test/"
 
@@ -61,5 +50,16 @@ for num in range(20):
 
     #Saving results
     cv2.imwrite(results_path + "Test_Img_YOLO_Detections ({}).JPG".format(num+1),cv2.cvtColor(color_image,cv2.COLOR_RGB2BGR))
+
+def bbox_2_yolo(x1,y1,x2,y2,width,height):
+
+    #Calculating parameters and normalzing
+    bbox_width = (x2 - x1)/width
+    bbox_height = (y2 - y1)/height
+
+    x_center = x1/width + bbox_width/2
+    y_center = y1/height + bbox_height/2
+
+    return x_center,y_center,bbox_width,bbox_height
 
 
