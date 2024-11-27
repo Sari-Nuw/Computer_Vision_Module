@@ -113,7 +113,6 @@ for img_num in range(len(os.listdir(test_set_path))):
         polygons.append(results)
         polygons_info.append(results_info)
 
-        #Sorting clusters for tracking
         # Filter out recognized harvested clusters
         polygons[-1], polygons_info[-1], to_delete = harvest_filter(polygons[-1],polygons_info[-1],baseline,harvest_margin,harvest_threshold)
 
