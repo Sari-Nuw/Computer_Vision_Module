@@ -49,7 +49,8 @@ for num in range(20):
     plt.show()
 
     #Saving results
-    cv2.imwrite(results_path + "Test_Img_YOLO_Detections ({}).JPG".format(num+1),cv2.cvtColor(color_image,cv2.COLOR_RGB2BGR))
+    cv2.imwrite(results_path + "Test_Img_YOLO_Detections ({}).JPG".format(num+1),
+                cv2.cvtColor(color_image,cv2.COLOR_RGB2BGR))
 
 def bbox_2_yolo(x1,y1,x2,y2,width,height):
 
