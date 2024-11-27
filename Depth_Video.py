@@ -7,9 +7,7 @@ camera = DepthCamera()
 #To calculate average depth for smoothness
 depth_array = []
 
-run = True
-
-while run:
+while True:
     try:
         #Getting photo footage
         ret, depth_frame, color_frame = camera.get_frame()
@@ -46,5 +44,4 @@ while run:
     #Press Ctrl+C in terminal to stop the program
     except KeyboardInterrupt:
         print("exit")
-        run = False
-        pass
+        break
