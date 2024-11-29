@@ -31,16 +31,10 @@ for num in range(20):
     #Getting results of object detection
     results = model(color_image)[0]
 
-    #Pixel coordinates of objects from predictions
-    prediction_boxes = []
-
     #Saving the position of the object boxes from predictions
     for result in results.boxes.data.tolist():
         x1, y1, x2, y2, score, class_id = result
         if score > threshold:
-            #Storing all the predicted boxes
-            points = [int(x1),int(y1),int(x2),int(y2)]
-            prediction_boxes.append(points)
             #To see bounding box around detected object
             cv2.rectangle(color_image, (int(x1), int(y1)), (int(x2), int(y2)), (255, 0, 0), 3)
 

@@ -24,9 +24,6 @@ wait = math.floor(interval*60)
 min_dist = 0
 max_dist = 2000
 
-#Online upload
-online_upload = False
-
 #Generate Point Clouds
 pcd_gen = True
 

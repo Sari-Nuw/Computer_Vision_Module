@@ -28,10 +28,6 @@ use_device = check_cuda()
 #Loading prediction models
 mushroom_model,substrate_model,visualizer = load_models(configs_folder,mushroom_architecture_selected,substrate_architecture_selected,use_device)
 
-#Saving pixel length of the substrate in images
-detected_length_pixels = []
-averaged_length_pixels = []
-
 #Confidence thresholds
 confidence_score_threshold = 0.5
 
@@ -43,25 +39,12 @@ for img_num in range(len(os.listdir(test_set_path))):
 
         # load the image
         img = mmcv.imread(test_set_path + test_img)
-        substrate_img = img.copy()
-
-        #Substrate segmentation inference
-        substrate_result = inference_detector(substrate_model, img).pred_instances
-                
-        # calculate substrate length data
-        detected_length_pixels.append(substrate_result[0]["bboxes"].cpu().numpy()[0][2] - substrate_result[0]["bboxes"].cpu().numpy()[0][0])
-
-        # calculate the substrate length average
-        averaged_length_pixels.append(sum(detected_length_pixels)/len(detected_length_pixels))
 
         # Mushroom segmentation inference
         image_result = inference_detector(mushroom_model, img)
 
         #Color correction of the images
         img = mmcv.image.bgr2rgb(img)
-
-        # Chcecking substrate results and saving substrate image
-        process_substrate_results(img,substrate_result,working_folder,img_num)
 
         # show the results before filtering
         visualizer.add_datasample(
