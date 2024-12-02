@@ -292,7 +292,8 @@ def save_cluster_array(sizing_image,poly,centre,box_image,local_poly,working_fol
 	np.save(working_folder + "/Arrays/RGB_image ({})_cluster ({})".format(i+1,j),array)
 
 #Saving the various image types
-def save_image(working_folder,full_image,i):
+def save_image(full_image,working_folder,i):
+
 	os.makedirs(working_folder + "/Sorted/",exist_ok=True)
 	cv2.imwrite(working_folder + "/Sorted/Test_Img ({}).JPG".format(i+1), cv2.cvtColor(full_image,cv2.COLOR_RGB2BGR))
 

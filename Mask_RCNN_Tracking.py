@@ -39,7 +39,7 @@ images = []
 #Tracking clusters and cluster information 
 polygons = []
 polygons_info = []
-post_harvest_polygons_info_base = []
+post_process_polygons_dict = []
 
 #Baseline for sorting
 baseline = []
@@ -103,8 +103,8 @@ for img_num in range(len(os.listdir(test_set_path))):
         # Result filters
         image_result = delete_low_confidence_predictions(image_result,confidence_score_threshold)
         image_result = delete_overlapping_with_lower_confidence(image_result,overlapping_iou_threshold)
-        if post_harvest_polygons_info_base:
-            image_result = delete_post_background_clusters(image_result,substrate_result,post_harvest_polygons_info_base,post_harvest_occluded_iou_overlap)
+        if post_process_polygons_dict:
+            image_result = delete_post_background_clusters(image_result,substrate_result,post_process_polygons_dict,post_harvest_occluded_iou_overlap)
 
         #Processing of reuslts for use in different data structures
         results, results_info = process_results(image_result,averaged_length_pixels,substrate_real_size = 50)     
@@ -163,22 +163,22 @@ for img_num in range(len(os.listdir(test_set_path))):
             j += 1    
 
         #Saving image in various forms
-        save_image(working_folder,full_image,img_num)
+        save_image(full_image,working_folder,img_num)
 
         #Equalizing polygon list
         polygons, polygons_info = equalize_polygons(polygons,polygons_info)
 
         #Creating post-processing bbox baseline
-        if not post_harvest_polygons_info_base:
-            post_harvest_polygons_info_base = copy.deepcopy(polygons_info[-1])
+        if not post_process_polygons_dict:
+            post_process_polygons_dict = copy.deepcopy(polygons_info[-1])
         else:
             for i in range(len(polygons_info[-1])):
                 if polygons_info[-1][i]==[0]:
                     continue
-                if i<len(post_harvest_polygons_info_base):
-                    post_harvest_polygons_info_base[i] = copy.deepcopy(polygons_info[-1][i])
+                if i<len(post_process_polygons_dict):
+                    post_process_polygons_dict[i] = copy.deepcopy(polygons_info[-1][i])
                 else:
-                    post_harvest_polygons_info_base.append(copy.deepcopy(polygons_info[-1][i]))
+                    post_process_polygons_dict.append(copy.deepcopy(polygons_info[-1][i]))
 
         #Gathering the information from individual clusters across images to be able to track their growth
         lines = line_setup(polygons[-1],lines,img.size/3)
